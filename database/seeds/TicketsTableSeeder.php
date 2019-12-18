@@ -9,14 +9,9 @@ class TicketsTableSeeder extends Seeder
 {
     public function run(Faker $faker)
     {
-        $tickets = create(Ticket::class, [
-            'closed_at' => $faker->randomElement([
-                null,
-                $faker->dateTimeBetween('-3 months', 'now'),
-            ]),
-        ], 300);
+        create(Ticket::class, [], 100);
 
-        foreach ($tickets as $ticket) {
+        foreach (Ticket::all() as $ticket) {
             create(Note::class, [
                 'referable_type' => Ticket::class,
                 'referable_id' => $ticket->id,

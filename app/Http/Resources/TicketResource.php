@@ -21,7 +21,7 @@ class TicketResource extends JsonResource
             'content' => $this->content,
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d h:m'),
             'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d h:m'),
-            'closed_at' => Carbon::parse($this->closed_at)->format('Y-m-d h:m'),
+            'closed_at' => (!$this->closed_at == null) ? Carbon::parse($this->closed_at)->format('Y-m-d h:m') : null,
             'assignedTo' => $this->assignedTo->fullname(),
             'author' => $this->author->fullname(),
         ];

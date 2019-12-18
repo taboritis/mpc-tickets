@@ -13,6 +13,6 @@ $factory->define(Ticket::class, function (Faker $faker) {
         'content' => $faker->sentence,
         'requested_by' => existedOrNew(User::class)->id,
         'assigned_to' => existedOrNew(SupportMember::class)->id,
-        'closed_at' => now(),
+        'closed_at' => $faker->randomElement([ now(), null ]),
     ];
 });

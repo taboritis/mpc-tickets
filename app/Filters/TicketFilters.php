@@ -4,7 +4,7 @@ namespace App\Filters;
 
 class TicketFilters extends Filters
 {
-    protected $filters = [ 'assignedTo', 'author', 'title', ];
+    protected $filters = [ 'assignedTo', 'author', 'title', 'openTicketsOnly' ];
 
     public function assignedTo(string $name)
     {
@@ -25,5 +25,12 @@ class TicketFilters extends Filters
     public function title(string $title)
     {
         return $this->builder->where('title', 'like', "%{$title}%");
+    }
+
+    public function openTicketsOnly($value)
+    {
+        return ($value == 'true')
+            ? $this->builder->where('closed_at', '!=', null)
+            : $this->builder;
     }
 }

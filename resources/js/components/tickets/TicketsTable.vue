@@ -13,9 +13,9 @@
           <span class="small mr-3"><i class="fa fa-map-pin mr-1 text-danger"></i>{{ ticket.assignedTo }}</span>
         </td>
         <td class="small text-right">
-          Created at: {{ ticket.created_at }}<br>
-          Updated at: {{ ticket.updated_at }}<br>
-          Closed at: {{ ticket.closed_at }}
+          <span>Created at: {{ ticket.created_at }}</span><br>
+          <span>Updated at: {{ ticket.updated_at }}</span><br>
+          <span v-if="ticket.closed_at"> Closed at: {{ ticket.closed_at }}</span>
         </td>
       </tr>
     </table>
