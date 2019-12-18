@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Ticket extends Model
 {
+    protected $guarded = [];
+
     /**
      * Relations to eager loading
      * @var array

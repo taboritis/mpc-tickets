@@ -18,4 +18,20 @@ class TicketCreateTest extends TestCase
         $this->json('POST', '/api/tickets', $ticket->toArray())
             ->assertUnauthorized();
     }
+
+    /** @test */
+    public function an_user_can_create_ticket()
+    {
+        $this->signIn();
+
+        $ticket = make(Ticket::class);
+
+        $response = $this->json('POST', '/api/tickets', $ticket->toArray(), $this->headers)
+            ->assertStatus(201);
+
+        $this->assertDatabaseHas('tickets', [
+            'title' => $ticket->title,
+            'content' => $ticket->content,
+        ]);
+    }
 }
