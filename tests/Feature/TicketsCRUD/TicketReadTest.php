@@ -49,7 +49,6 @@ class TicketReadTest extends TestCase
         $this->withHeaders($this->headers)
             ->json('GET', '/api/tickets')
             ->assertSee($this->ticket->title)
-            ->assertSee($this->ticket->content)
             ->assertSee($this->ticket->assignedTo->fullname())
             ->assertSee($this->ticket->author->fullname());
     }
