@@ -18,6 +18,11 @@ class TicketsController extends Controller
         return view('tickets.index');
     }
 
+    /**
+     * @param Ticket $ticket
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Ticket $ticket)
     {
         $ticket->load('notes.author');
