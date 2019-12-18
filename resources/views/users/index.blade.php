@@ -5,7 +5,6 @@
     <div class="d-flex">
       <h4>List of Users</h4>
     </div>
-    <hr>
     <users-index></users-index>
   </div>
 @stop

@@ -43,7 +43,7 @@ class ReadUsersTest extends TestCase
     /** @test */
     public function an_auth_user_can_get_users_index()
     {
-        $user = $this->signIn();
+        $this->signIn();
 
         $this->withHeaders($this->headers)->json('GET', '/api/users')
             ->assertStatus(200)
