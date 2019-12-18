@@ -6,6 +6,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', 'UsersController@index');
+    Route::get('/tickets', 'TicketsController@index');
 });
 
 Auth::routes();
