@@ -20,6 +20,7 @@ class TicketsController extends Controller
 
     public function show(Ticket $ticket)
     {
+        $ticket->load('notes.author');
         return view('tickets.show', compact('ticket'));
     }
 }

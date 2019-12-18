@@ -79,7 +79,7 @@ class TicketReadTest extends TestCase
         $note = create(Note::class, [ 'referable_type' => Ticket::class, 'referable_id' => $this->ticket->id ]);
 
         $this->get($this->ticket->path())
-            // ->assertSee($note->content)
+            ->assertSee($note->content)
             ->assertSee($this->ticket->title)
             ->assertSee($this->ticket->content)
             ->assertOk();

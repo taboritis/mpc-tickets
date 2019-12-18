@@ -12,6 +12,10 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Ticket extends Model
 {
+    /**
+     * Relations to eager loading
+     * @var array
+     */
     protected $with = [ 'author', 'assignedTo', 'notes' ];
 
     /**
