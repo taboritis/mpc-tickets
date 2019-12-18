@@ -11,6 +11,15 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Ticket extends Model
 {
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($ticket) {
+            $ticket->notes()->delete();
+        });
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */

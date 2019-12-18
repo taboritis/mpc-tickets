@@ -46,4 +46,13 @@ class TicketTest extends TestCase
         create(Note::class, [ 'referable_type' => Ticket::class, 'referable_id' => $this->ticket->id ]);
         $this->assertCount(1, $this->ticket->fresh()->notes);
     }
+
+    /** @test */
+    public function as_ticket_is_deleted_a_refered_notes_are_deleted_aswell()
+    {
+        create(Note::class, [ 'referable_type' => Ticket::class, 'referable_id' => $this->ticket->id ]);
+        $this->ticket->delete();
+
+        $this->assertEquals(0, Note::count());
+    }
 }
