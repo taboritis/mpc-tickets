@@ -23,4 +23,14 @@ class ReadUsersTest extends TestCase
     {
         $this->get('/users')->assertRedirect('/login');
     }
+
+    /** @test */
+    public function an_authenticated_user_can_see_list_of_users()
+    {
+        $this->signIn();
+
+        $this->get('/users')
+            ->assertOk()
+            ->assertSee('List of Users');
+    }
 }
