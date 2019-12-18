@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class Ticket
@@ -18,4 +19,13 @@ class Ticket extends Model
         return $this->morphMany(Note::class, 'referable');
     }
 
+    /**
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeOld(Builder $query)
+    {
+        return $query->where('closed_at', '!=', null);
+    }
 }

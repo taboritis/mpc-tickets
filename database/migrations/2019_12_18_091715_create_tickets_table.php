@@ -16,6 +16,7 @@ class CreateTicketsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('content')->nullable();
+            $table->timestamp('closed_at')->nullable();
             $table->unsignedBigInteger('requested_by');
             $table->unsignedBigInteger('assigned_to')->nullable();
             $table->timestamps();

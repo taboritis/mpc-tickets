@@ -13,5 +13,6 @@ $factory->define(Ticket::class, function (Faker $faker) {
         'content' => $faker->sentence,
         'requested_by' => create(User::class)->id,
         'assigned_to' => create(SupportMember::class)->id,
+        'closed_at' => now(),
     ];
 });
