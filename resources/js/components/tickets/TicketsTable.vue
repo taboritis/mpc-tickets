@@ -7,8 +7,8 @@
       </tr>
       <tr v-for="ticket in dataset.data" v-if="dataset">
         <td>
-          <strong>{{ ticket.title }}</strong><br>
-          <span class="small">{{ ticket.content }}</span><br>
+          <strong><a :href="ticket.path">{{ ticket.title }}</a></strong><br>
+          <span class="small">{{ ticket.content | limit(100) }}</span><br>
           <span class="small mr-3"><i class="fa fa-user mr-1 text-primary"></i>{{ ticket.author }}</span>
           <span class="small mr-3"><i class="fa fa-map-pin mr-1 text-danger"></i>{{ ticket.assignedTo }}</span>
         </td>
@@ -54,6 +54,13 @@
         created() {
             this.fetch();
             EventsBus.$on('filters-updated', () => this.fetch());
+        },
+
+        filters: {
+            limit(string, value) {
+                let dots = (string.length > value) ? '...' : '';
+                return string.substring(0, value) + dots;
+            }
         },
 
         methods: {

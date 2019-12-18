@@ -24,6 +24,7 @@ class TicketResource extends JsonResource
             'closed_at' => (!$this->closed_at == null) ? Carbon::parse($this->closed_at)->format('Y-m-d h:m') : null,
             'assignedTo' => $this->assignedTo->fullname(),
             'author' => $this->author->fullname(),
+            'path' => $this->path(),
         ];
     }
 }

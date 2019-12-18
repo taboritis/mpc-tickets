@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Ticket extends Model
 {
+    protected $with = [ 'author', 'assignedTo', 'notes' ];
+
     /**
      * Delete related notes
      */
@@ -72,4 +74,13 @@ class Ticket extends Model
     {
         return $filters->apply($query);
     }
+
+    /**
+     * @return string
+     */
+    public function path()
+    {
+        return "/tickets/{$this->id}";
+    }
 }
+

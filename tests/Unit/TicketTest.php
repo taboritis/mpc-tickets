@@ -69,4 +69,12 @@ class TicketTest extends TestCase
     {
         $this->assertInstanceOf(SupportMember::class, $this->ticket->assignedTo);
     }
+
+    /** @test */
+    public function a_ticket_has_a_path()
+    {
+        $path = '/tickets/' . $this->ticket->id;
+
+        $this->assertEquals($path, $this->ticket->path());
+    }
 }
