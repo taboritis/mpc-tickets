@@ -12,8 +12,8 @@
         <td>
           <div class="d-flex">
             <div class="mr-auto">{{ user.email }}</div>
-            <div class="ml-2">Notes</div>
-            <div class="ml-2">Tasks</div>
+            <div class="ml-2">Notes: {{ user.notes.length }}</div>
+            <div class="ml-2">Tasks: {{ user.tickets_number }}</div>
           </div>
         </td>
       </tr>

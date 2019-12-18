@@ -2,13 +2,13 @@
   <div>
     <ul class="pagination" v-if="shouldPaginate">
       <li class="page-item" v-show="prevUrl">
-        <a @click.prevent="page--" class="page-link" href="#" rel="prev"> &laquo; Poprzednia </a>
+        <a @click.prevent="page--" class="page-link" href="#" rel="prev"> &laquo; Prev </a>
       </li>
       <li class="page-item active">
-        <a class="page-link" href="#">{{ page }} z {{ dataset.last_page }}<span class="sr-only">(current)</span></a>
+        <a class="page-link" href="#">{{ page }} from {{ dataset.meta.last_page }}<span class="sr-only">(current)</span></a>
       </li>
       <li class="page-item" v-show="nextUrl">
-        <a @click.prevent="page++" class="page-link" href="#" rel="next"> Następna &raquo; </a>
+        <a @click.prevent="page++" class="page-link" href="#" rel="next"> Next &raquo; </a>
       </li>
     </ul>
   </div>
@@ -26,17 +26,19 @@
         },
 
         created() {
-            this.page = this.dataset.current_page;
-            this.prevUrl = this.dataset.prev_page_url;
-            this.nextUrl = this.dataset.next_page_url;
+            if (this.dataset) {
+                this.page = this.dataset.meta.current_page;
+                this.prevUrl = this.dataset.links.prev;
+                this.nextUrl = this.dataset.links.next;
+            }
         },
 
         watch: {
 
             dataset() {
-                this.page = this.dataset.current_page;
-                this.prevUrl = this.dataset.prev_page_url;
-                this.nextUrl = this.dataset.next_page_url;
+                this.page = this.dataset.meta.current_page;
+                this.prevUrl = this.dataset.links.prev;
+                this.nextUrl = this.dataset.links.next;
             },
 
             page() {

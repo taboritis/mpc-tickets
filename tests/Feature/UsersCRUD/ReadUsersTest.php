@@ -33,4 +33,20 @@ class ReadUsersTest extends TestCase
             ->assertOk()
             ->assertSee('List of Users');
     }
+
+    /** @test */
+    public function non_auth_user_cannot_get_users_index()
+    {
+        $this->json('GET', '/api/users')->assertUnauthorized();
+    }
+
+    /** @test */
+    public function an_auth_user_can_get_users_index()
+    {
+        $user = $this->signIn();
+
+        $this->withHeaders($this->headers)->json('GET', '/api/users')
+            ->assertStatus(200)
+            ->assertSee($this->user->name);
+    }
 }
