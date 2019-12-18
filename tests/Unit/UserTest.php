@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\User;
+use App\Ticket;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -28,5 +29,16 @@ class UserTest extends TestCase
         $this->assertNotNull($this->user->name);
         $this->assertNotNull($this->user->surname);
         $this->assertNotFalse(filter_var($this->user->email, FILTER_VALIDATE_EMAIL));
+    }
+
+    /** @test */
+    public function a_user_has_many_tickets()
+    {
+        $ticketsCreatedByUser = create(Ticket::class, [
+            'requested_by' => $this->user->id,
+        ], 2);
+        $otherTicket = create(Ticket::class);
+
+        $this->assertCount(2, $this->user->tickets);
     }
 }
