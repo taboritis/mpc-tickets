@@ -1,5 +1,8 @@
 <template>
   <div class="card card-body">
+    <div class="d-flex">
+      <h3>List of tickets</h3>
+    </div>
     <tickets-table :filters="filters"></tickets-table>
   </div>
 </template>
@@ -12,6 +15,7 @@
             return {
                 filters: {
                     page: 1,
+                    limit: 3,
                 },
             }
         }

@@ -37,6 +37,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Add global scope
+     */
     protected static function boot()
     {
         parent::boot();
@@ -59,5 +62,13 @@ class User extends Authenticatable
     public function notes()
     {
         return $this->morphMany(Note::class, 'referable');
+    }
+
+    /**
+     * @return string
+     */
+    public function fullname()
+    {
+        return "{$this->name} {$this->surname}";
     }
 }

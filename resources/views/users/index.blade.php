@@ -25,7 +25,7 @@
                 @endif
               </div>
               <div class="text-center ml-2">
-                <i class="fa fa-check-square-o text-primary ml-1"></i> {{ $user->tickets_number }}
+                <i class="fa fa-check-square-o text-primary ml-1"></i> {{ $user->tickets_count }}
               </div>
             </div>
           </td>

@@ -1,24 +1,30 @@
 <template>
-  <div class="small">
-    <table class="table table-hover table-bordered table-sm">
+  <div>
+    <table class="table table-hover table-sm">
       <tr>
-        <th>Title</th>
-        <th>Content</th>
-        <th>Created at</th>
-        <th>Updated at</th>
-        <th>Requested By</th>
-        <th>Assigned To</th>
-        <th>Closed At</th>
+        <th>Title and content</th>
+        <th class="text-right">Timestamps</th>
       </tr>
-      <tr v-for="ticket in dataset" v-if="dataset">
-        <td></td>
-        <td></td>
+      <tr v-for="ticket in dataset.data" v-if="dataset">
+        <td>
+          <strong>{{ ticket.title }}</strong><br>
+          <span class="small">{{ ticket.content }}</span><br>
+          <span class="small mr-3"><i class="fa fa-user mr-1 text-primary"></i>{{ ticket.author }}</span>
+          <span class="small mr-3"><i class="fa fa-map-pin mr-1 text-danger"></i>{{ ticket.assignedTo }}</span>
+        </td>
+        <td class="small text-right">
+          Created at: {{ ticket.created_at }}<br>
+          Updated at: {{ ticket.updated_at }}<br>
+          Closed at: {{ ticket.closed_at }}
+        </td>
       </tr>
     </table>
   </div>
 </template>
 <script>
     export default {
+
+        props: ['filters'],
 
         data() {
             return {
@@ -32,7 +38,12 @@
 
         methods: {
             fetch() {
-                this.dataset = [1, 2, 3]
+                axios.get('/api/tickets', {
+                    params: this.filters
+                }).then(res => {
+                    console.log(res.data);
+                    this.dataset = res.data;
+                })
             }
         }
     }

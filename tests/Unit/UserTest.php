@@ -57,4 +57,11 @@ class UserTest extends TestCase
         $this->assertEquals(3, Note::count());
         $this->assertCount(2, $this->user->notes);
     }
+
+    /** @test */
+    public function a_user_has_a_fullname()
+    {
+        $fullname = $this->user->name . ' ' . $this->user->surname;
+        $this->assertEquals($fullname, $this->user->fullname());
+    }
 }

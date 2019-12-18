@@ -10,8 +10,20 @@ class TicketsApiController extends Controller
 {
     public function index()
     {
-        $tickets = Ticket::paginate(25);
+        $limit = $this->getLimit();
+
+        $tickets = Ticket::with('assignedTo', 'author')
+            ->paginate($limit);
 
         return TicketResource::collection($tickets);
+    }
+
+    /**
+     * @return int
+     */
+    private function getLimit(): int
+    {
+        $limit = request('limit') ?? 10;
+        return ($limit > 100) ? 100 : $limit;
     }
 }

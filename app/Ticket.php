@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Ticket extends Model
 {
+    /**
+     * Delete related notes
+     */
     protected static function boot()
     {
         parent::boot();
@@ -42,8 +45,19 @@ class Ticket extends Model
             ->where('closed_at', '!=', null);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function author()
     {
         return $this->belongsTo(User::class, 'requested_by');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function assignedTo()
+    {
+        return $this->belongsTo(SupportMember::class, 'assigned_to');
     }
 }

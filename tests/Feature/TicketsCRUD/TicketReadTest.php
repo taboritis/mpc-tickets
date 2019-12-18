@@ -48,6 +48,19 @@ class TicketReadTest extends TestCase
         $this->withHeaders($this->headers)
             ->json('GET', '/api/tickets')
             ->assertSee($this->ticket->title)
-            ->assertSee($this->ticket->content);
+            ->assertSee($this->ticket->content)
+            ->assertSee($this->ticket->assignedTo->fullname())
+            ->assertSee($this->ticket->author->fullname());
+    }
+
+    /** @test */
+    public function limit_response_to_100_tickets()
+    {
+        $this->signIn();
+        create(Ticket::class, [], 150);
+
+        $response = $this->withHeaders($this->headers)
+            ->json('GET', '/api/tickets', [ 'limit' => 300 ])
+            ->assertJsonCount(100, 'data');
     }
 }

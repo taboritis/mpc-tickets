@@ -19,9 +19,11 @@ class TicketResource extends JsonResource
         return [
             'title' => $this->title,
             'content' => $this->content,
-            'created_at' => Carbon::parse($this->created_at)->toDateTimeString(),
-            'updated_at' => Carbon::parse($this->updated_at)->toDateTimeString(),
-            'author' => $this->author->name . ' ' . $this->author->surname,
+            'created_at' => Carbon::parse($this->created_at)->format('Y-m-d h:m'),
+            'updated_at' => Carbon::parse($this->updated_at)->format('Y-m-d h:m'),
+            'closed_at' => Carbon::parse($this->closed_at)->format('Y-m-d h:m'),
+            'assignedTo' => $this->assignedTo->fullname(),
+            'author' => $this->author->fullname(),
         ];
     }
 }
