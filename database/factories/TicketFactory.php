@@ -9,7 +9,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Ticket::class, function (Faker $faker) {
     return [
-        'title' => $faker->word(),
+        'title' => $faker->words(4, true),
         'content' => $faker->sentence,
         'requested_by' => existedOrNew(User::class)->id,
         'assigned_to' => existedOrNew(SupportMember::class)->id,

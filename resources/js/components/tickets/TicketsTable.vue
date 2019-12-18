@@ -19,10 +19,29 @@
         </td>
       </tr>
     </table>
+    <div class="d-flex justify-content-around small">
+      <div class="mr-auto">
+        <paginator :dataset="dataset" @changed="changePage"></paginator>
+      </div>
+      <div class="form-inline">
+        <div class="mr-2">Results:</div>
+        <select @change="fetch" class="form-control form-control-sm" v-model="filters.limit">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+    import Paginator from "../Paginator";
+
     export default {
+
+        components: { Paginator },
 
         props: ['filters'],
 
@@ -44,7 +63,12 @@
                 }).then(res => {
                     this.dataset = res.data;
                 })
+            },
+            changePage(page) {
+                this.filters.page = page;
+                this.fetch();
             }
+
         }
     }
 </script>

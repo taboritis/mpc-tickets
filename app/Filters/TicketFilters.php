@@ -4,13 +4,26 @@ namespace App\Filters;
 
 class TicketFilters extends Filters
 {
-    protected $filters = [ 'assignedTo' ];
+    protected $filters = [ 'assignedTo', 'author', 'title', ];
 
-    public function assignedTo(string $string)
+    public function assignedTo(string $name)
     {
-        return $this->builder->whereHas('assignedTo', function ($query) use ($string) {
-            return $query->where('users.surname', 'like', "%{$string}%")
-                ->orWhere('users.name', 'like', "%{$string}%");
+        return $this->builder->whereHas('assignedTo', function ($query) use ($name) {
+            return $query->where('users.surname', 'like', "%{$name}%")
+                ->orWhere('users.name', 'like', "%{$name}%");
         });
+    }
+
+    public function author(string $name)
+    {
+        return $this->builder->whereHas('author', function ($query) use ($name) {
+            return $query->where('users.surname', 'like', "%{$name}%")
+                ->orWhere('users.name', 'like', "%{$name}%");
+        });
+    }
+
+    public function title(string $title)
+    {
+        return $this->builder->where('title', 'like', "%{$title}%");
     }
 }
