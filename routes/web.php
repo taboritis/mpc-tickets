@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    return redirect('/users');
+    return redirect('/tickets');
 });
 
 Route::middleware('auth')->group(function () {
@@ -14,5 +14,5 @@ Route::middleware('auth')->group(function () {
 Auth::routes();
 
 Route::get('/home', function () {
-    return redirect('/users');
+    return redirect('/tickets');
 })->name('home');

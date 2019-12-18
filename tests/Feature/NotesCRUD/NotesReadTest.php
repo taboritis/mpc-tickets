@@ -31,4 +31,13 @@ class NotesReadTest extends TestCase
     {
         $this->get('/notes')->assertRedirect('/login');
     }
+
+    /** @test */
+    public function a_typical_user_cannot_see_list_of_notes()
+    {
+        $this->signIn();
+        $this->get('/notes')
+            ->assertRedirect('/tickets')
+            ->assertSessionHasErrors();
+    }
 }
