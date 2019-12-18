@@ -14,7 +14,7 @@ class TicketsTableSeeder extends Seeder
                 null,
                 $faker->dateTimeBetween('-3 months', 'now'),
             ]),
-        ], 1000);
+        ], 300);
 
         foreach ($tickets as $ticket) {
             create(Note::class, [

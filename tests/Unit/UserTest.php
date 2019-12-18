@@ -39,7 +39,7 @@ class UserTest extends TestCase
         $ticketsCreatedByUser = create(Ticket::class, [
             'requested_by' => $this->user->id,
         ], 2);
-        $otherTicket = create(Ticket::class);
+        $otherTicket = create(Ticket::class, [ 'requested_by' => create(User::class)->id ]);
 
         $this->assertCount(2, $this->user->tickets);
     }

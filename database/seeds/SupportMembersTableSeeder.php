@@ -11,6 +11,6 @@ class SupportMembersTableSeeder extends Seeder
      */
     public function run()
     {
-        create(SupportMember::class, [], 10);
+        create(SupportMember::class, [], 5);
     }
 }

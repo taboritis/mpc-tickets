@@ -16,15 +16,15 @@ class UsersTableSeeder extends Seeder
             'name' => 'Piotr',
             'surname' => 'Skrobol',
             'email' => 'pio.skro@gmail.com',
-            'password' => env('ADMIN_PASSWORD', 'password'),
+            'password' => bcrypt(env('ADMIN_PASSWORD', 'password')),
         ]);
 
-        $users = create(User::class, [], 100);
+        $users = create(User::class, [], 20);
 
         foreach ($users as $user) {
             create(Note::class, [
                 'referable_id' => $user->id,
-            ], random_int(1, 3));
+            ], random_int(1, 4));
         }
     }
 }
