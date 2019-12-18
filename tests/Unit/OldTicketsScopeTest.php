@@ -14,6 +14,8 @@ class OldTicketsScopeTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected $daysNo;
+
     /**
      * @var mixed
      */
@@ -23,6 +25,7 @@ class OldTicketsScopeTest extends TestCase
     {
         parent::setUp();
         $this->ticket = create(Ticket::class, [ 'closed_at' => null ]);
+        $this->daysNo = config('ticket.old');
     }
 
     /** @test */
@@ -31,5 +34,16 @@ class OldTicketsScopeTest extends TestCase
         $tickets = Ticket::old()->count();
 
         $this->assertEquals(0, $tickets);
+    }
+
+    /** @test */
+    public function a_scope_old_contains_only_tickets_where_closed_date_is_lesser_than_defined()
+    {
+        create(Ticket::class, [ 'closed_at' => now()->subDays($this->daysNo + 1) ], 3);
+        create(Ticket::class, [ 'closed_at' => now()->subDays($this->daysNo - 1) ]);
+
+        $ticketsNo = Ticket::old()->count();
+
+        $this->assertEquals(3, $ticketsNo);
     }
 }

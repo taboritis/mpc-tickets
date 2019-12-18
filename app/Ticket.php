@@ -26,6 +26,10 @@ class Ticket extends Model
      */
     public function scopeOld(Builder $query)
     {
-        return $query->where('closed_at', '!=', null);
+        $days = config('ticket.old');
+
+        return $query
+            ->where('closed_at', '<', now()->subDays($days))
+            ->where('closed_at', '!=', null);
     }
 }
