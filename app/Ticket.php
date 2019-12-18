@@ -13,6 +13,12 @@ use Illuminate\Database\Eloquent\Builder;
 class Ticket extends Model
 {
     /**
+     * Relations to eager loading
+     * @var array
+     */
+    protected $with = [ 'author', 'assignedTo', 'notes' ];
+
+    /**
      * Delete related notes
      */
     protected static function boot()
@@ -72,4 +78,13 @@ class Ticket extends Model
     {
         return $filters->apply($query);
     }
+
+    /**
+     * @return string
+     */
+    public function path()
+    {
+        return "/tickets/{$this->id}";
+    }
 }
+

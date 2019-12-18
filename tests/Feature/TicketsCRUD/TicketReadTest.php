@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\TicketsCRUD;
 
+use App\Note;
 use App\Ticket;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -48,7 +49,6 @@ class TicketReadTest extends TestCase
         $this->withHeaders($this->headers)
             ->json('GET', '/api/tickets')
             ->assertSee($this->ticket->title)
-            ->assertSee($this->ticket->content)
             ->assertSee($this->ticket->assignedTo->fullname())
             ->assertSee($this->ticket->author->fullname());
     }
@@ -62,5 +62,25 @@ class TicketReadTest extends TestCase
         $response = $this->withHeaders($this->headers)
             ->json('GET', '/api/tickets', [ 'limit' => 300 ])
             ->assertJsonCount(100, 'data');
+    }
+
+    /** @test */
+    public function a_guest_cannot_see_details_page()
+    {
+        $this->get($this->ticket->path())->assertRedirect('/login');
+    }
+
+    /** @test */
+    public function owner_can_see_ticket()
+    {
+        $this->signIn($this->ticket->author);
+
+        $note = create(Note::class, [ 'referable_type' => Ticket::class, 'referable_id' => $this->ticket->id ]);
+
+        $this->get($this->ticket->path())
+            ->assertSee($note->content)
+            ->assertSee($this->ticket->title)
+            ->assertSee($this->ticket->content)
+            ->assertOk();
     }
 }
