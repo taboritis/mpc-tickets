@@ -1,16 +1,20 @@
 <template>
   <div class="card card-body">
     <div class="d-flex">
-      <h3>List of tickets</h3>
+      <h3 class="mr-auto">List of Tickets</h3>
     </div>
+    <tickets-filters :filters="filters"></tickets-filters>
     <tickets-table :filters="filters"></tickets-table>
   </div>
 </template>
 <script>
+    import TicketsFilters from "./TicketsFilters";
     import TicketsTable from "./TicketsTable";
 
     export default {
-        components: { TicketsTable },
+
+        components: { TicketsFilters, TicketsTable },
+
         data() {
             return {
                 filters: {

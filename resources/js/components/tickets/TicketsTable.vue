@@ -34,6 +34,7 @@
 
         created() {
             this.fetch();
+            EventsBus.$on('filters-updated', () => this.fetch());
         },
 
         methods: {
@@ -41,7 +42,6 @@
                 axios.get('/api/tickets', {
                     params: this.filters
                 }).then(res => {
-                    console.log(res.data);
                     this.dataset = res.data;
                 })
             }
