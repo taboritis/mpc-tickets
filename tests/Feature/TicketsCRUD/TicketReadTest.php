@@ -89,4 +89,14 @@ class TicketReadTest extends TestCase
         $this->json('GET', '/api' . $this->ticket->path(), [], $this->headers)
             ->assertUnauthorized();
     }
+
+    /** @test */
+    public function an_authenticated_user_can_get_single_ticket()
+    {
+        $this->signIn();
+
+        $this->json('GET', '/api' . $this->ticket->path(), [], $this->headers)
+            ->assertJsonFragment([ $this->ticket->title ])
+            ->assertStatus(200);
+    }
 }

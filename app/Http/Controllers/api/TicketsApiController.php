@@ -27,7 +27,8 @@ class TicketsApiController extends BaseApiController
         return TicketResource::collection($tickets);
     }
 
-    public function show()
+    public function show(Ticket $ticket)
     {
+        return new TicketResource($ticket);
     }
 }
