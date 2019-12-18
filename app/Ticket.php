@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Filters\Filters;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -59,5 +60,16 @@ class Ticket extends Model
     public function assignedTo()
     {
         return $this->belongsTo(SupportMember::class, 'assigned_to');
+    }
+
+    /**
+     * @param Builder $query
+     * @param Filters $filters
+     *
+     * @return mixed
+     */
+    public function scopeFilter(Builder $query, Filters $filters)
+    {
+        return $filters->apply($query);
     }
 }
