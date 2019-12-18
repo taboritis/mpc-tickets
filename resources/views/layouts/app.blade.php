@@ -17,6 +17,7 @@
 <body>
 <div id="app">
   @include('layouts.navbar')
+  @include('layouts.errors')
   <main class="container py-4">
     @yield('content')
   </main>
