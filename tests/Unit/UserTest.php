@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\User;
+use App\Note;
 use App\Ticket;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -32,7 +33,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function a_user_has_many_tickets()
+    public function an_user_has_many_tickets()
     {
         $ticketsCreatedByUser = create(Ticket::class, [
             'requested_by' => $this->user->id,
@@ -40,5 +41,19 @@ class UserTest extends TestCase
         $otherTicket = create(Ticket::class);
 
         $this->assertCount(2, $this->user->tickets);
+    }
+
+    /** @test */
+    public function an_user_has_many_notes()
+    {
+        $relatedNotes = create(Note::class, [
+            'referable_type' => User::class,
+            'referable_id' => $this->user->id,
+        ], 2);
+
+        $unrelatedNotes = create(Note::class);
+
+        $this->assertEquals(3, Note::count());
+        $this->assertCount(2, $this->user->notes);
     }
 }
