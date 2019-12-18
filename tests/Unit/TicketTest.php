@@ -35,7 +35,6 @@ class TicketTest extends TestCase
         $this->assertInstanceOf(Ticket::class, $this->ticket);
         $this->assertNotNull($this->ticket->title);
         $this->assertNotNull($this->ticket->content);
-        $this->assertNotNull($this->ticket->closed_at);
         $this->assertDatabaseHas('users', [ 'id' => $this->ticket->requested_by ]);
     }
 

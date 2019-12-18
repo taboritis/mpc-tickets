@@ -5,6 +5,7 @@ namespace Tests\Feature\NotesCRUD;
 use App\Note;
 use App\Ticket;
 use Tests\TestCase;
+use App\SupportMember;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class NotesReadTest extends TestCase
@@ -39,5 +40,17 @@ class NotesReadTest extends TestCase
         $this->get('/notes')
             ->assertRedirect('/tickets')
             ->assertSessionHasErrors();
+    }
+
+    /** @test */
+    public function a_support_member_can_see_list_of_notes()
+    {
+        $supportMember = create(SupportMember::class);
+        $this->signIn($supportMember);
+
+        $this->get('/notes')
+            ->assertOk()
+            ->assertSee($this->note1->content)
+            ->assertSee($this->note2->content);
     }
 }
