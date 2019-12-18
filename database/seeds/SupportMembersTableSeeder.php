@@ -1,5 +1,6 @@
 <?php
 
+use App\SupportMember;
 use Illuminate\Database\Seeder;
 
 class SupportMembersTableSeeder extends Seeder
@@ -10,6 +11,6 @@ class SupportMembersTableSeeder extends Seeder
      */
     public function run()
     {
-        create(SupportMembersTableSeeder::class, [], 10);
+        create(SupportMember::class, [], 10);
     }
 }

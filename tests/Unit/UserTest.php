@@ -52,7 +52,7 @@ class UserTest extends TestCase
             'referable_id' => $this->user->id,
         ], 2);
 
-        $unrelatedNotes = create(Note::class);
+        $unrelatedNotes = create(Note::class, [ 'referable_id' => create(User::class)->id ]);
 
         $this->assertEquals(3, Note::count());
         $this->assertCount(2, $this->user->notes);

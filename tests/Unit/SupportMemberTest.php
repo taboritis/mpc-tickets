@@ -37,7 +37,8 @@ class SupportMemberTest extends TestCase
         ], 2);
 
         $otherTickets = create(Ticket::class, [
-            'requested_by' => $this->supportMember->id, // but not assigned_to
+            'assigned_to' => create(SupportMember::class)->id,
+            'requested_by' => $this->supportMember->id,
         ]);
 
         $this->assertCount(2, $this->supportMember->tickets);

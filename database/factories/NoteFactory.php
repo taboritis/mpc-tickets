@@ -9,9 +9,9 @@ use Faker\Generator as Faker;
 
 $factory->define(Note::class, function (Faker $faker) {
     return [
-        'author_id' => create(SupportMember::class)->id,
+        'author_id' => existedOrNew(SupportMember::class)->id,
         'content' => $faker->sentence,
         'referable_type' => User::class,
-        'referable_id' => create(User::class)->id,
+        'referable_id' => existedOrNew(User::class)->id,
     ];
 });

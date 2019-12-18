@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use App\Note;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -18,6 +19,12 @@ class UsersTableSeeder extends Seeder
             'password' => env('ADMIN_PASSWORD', 'password'),
         ]);
 
-        create(User::class, [], 100);
+        $users = create(User::class, [], 100);
+
+        foreach ($users as $user) {
+            create(Note::class, [
+                'referable_id' => $user->id,
+            ], random_int(1, 3));
+        }
     }
 }

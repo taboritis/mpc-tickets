@@ -11,8 +11,8 @@ $factory->define(Ticket::class, function (Faker $faker) {
     return [
         'title' => $faker->word(),
         'content' => $faker->sentence,
-        'requested_by' => create(User::class)->id,
-        'assigned_to' => create(SupportMember::class)->id,
+        'requested_by' => existedOrNew(User::class)->id,
+        'assigned_to' => existedOrNew(SupportMember::class)->id,
         'closed_at' => now(),
     ];
 });
