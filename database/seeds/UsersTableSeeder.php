@@ -17,5 +17,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'pio.skro@gmail.com',
             'password' => env('ADMIN_PASSWORD', 'password'),
         ]);
+
+        create(User::class, [], 100);
     }
 }
