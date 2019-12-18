@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Filters\Filters;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -11,6 +12,9 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Ticket extends Model
 {
+    /**
+     * Delete related notes
+     */
     protected static function boot()
     {
         parent::boot();
@@ -40,5 +44,32 @@ class Ticket extends Model
         return $query
             ->where('closed_at', '<', now()->subDays($days))
             ->where('closed_at', '!=', null);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'requested_by');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function assignedTo()
+    {
+        return $this->belongsTo(SupportMember::class, 'assigned_to');
+    }
+
+    /**
+     * @param Builder $query
+     * @param Filters $filters
+     *
+     * @return mixed
+     */
+    public function scopeFilter(Builder $query, Filters $filters)
+    {
+        return $filters->apply($query);
     }
 }

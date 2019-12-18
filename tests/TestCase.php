@@ -16,7 +16,7 @@ abstract class TestCase extends BaseTestCase
     /**
      * @var array
      */
-    protected $headers;
+    protected $headers = [];
 
     protected function signIn(User $user = null)
     {

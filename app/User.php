@@ -13,8 +13,6 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $appends = [ 'ticketsNumber' ];
-
     /**
      * The attributes that are mass assignable.
      * @var array
@@ -40,6 +38,17 @@ class User extends Authenticatable
     ];
 
     /**
+     * Add global scope
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('ticket_count', function ($builder) {
+            $builder->withCount('tickets');
+        });
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function tickets()
@@ -55,8 +64,11 @@ class User extends Authenticatable
         return $this->morphMany(Note::class, 'referable');
     }
 
-    public function getTicketsNumberAttribute()
+    /**
+     * @return string
+     */
+    public function fullname()
     {
-        return $this->tickets->count();
+        return "{$this->name} {$this->surname}";
     }
 }
