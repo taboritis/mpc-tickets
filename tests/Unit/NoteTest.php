@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Note;
 use App\User;
+use App\Ticket;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -33,5 +34,22 @@ class NoteTest extends TestCase
     public function a_note_has_an_author()
     {
         $this->assertInstanceOf(User::class, $this->note->author);
+    }
+
+    /** @test */
+    public function a_note_can_refers_to_user()
+    {
+        $this->assertInstanceOf(User::class, $this->note->referable);
+    }
+
+    /** @test */
+    public function a_note_can_refers_to_ticket()
+    {
+        $note = create(Note::class, [
+            'referable_type' => Ticket::class,
+            'referable_id' => create(Ticket::class)->id,
+        ]);
+
+        $this->assertInstanceOf(Ticket::class, $note->referable);
     }
 }

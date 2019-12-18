@@ -18,4 +18,14 @@ class Note extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
+    /**
+     * Polymorphic relation to Ticket or User
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function referable()
+    {
+        return $this->morphTo();
+    }
+
+
 }
