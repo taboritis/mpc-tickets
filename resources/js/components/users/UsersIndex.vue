@@ -1,7 +1,7 @@
 <template>
   <div>
-    <users-filters></users-filters>
-    <users-table></users-table>
+    <users-filters :filters="filters"></users-filters>
+    <users-table :filters="filters"></users-table>
   </div>
 </template>
 <script>
@@ -9,6 +9,14 @@
     import UsersTable from "./UsersTable";
 
     export default {
-        components: { UsersFilters, UsersTable }
+        components: { UsersFilters, UsersTable },
+
+        data() {
+            return {
+                filters: {
+                    page: 1,
+                }
+            }
+        }
     }
 </script>
