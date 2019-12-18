@@ -59,8 +59,7 @@ class TicketReadTest extends TestCase
         $this->signIn();
         create(Ticket::class, [], 150);
 
-        $response = $this->withHeaders($this->headers)
-            ->json('GET', '/api/tickets', [ 'limit' => 300 ])
+        $this->json('GET', '/api/tickets', [ 'limit' => 300 ], $this->headers)
             ->assertJsonCount(100, 'data');
     }
 
@@ -82,5 +81,12 @@ class TicketReadTest extends TestCase
             ->assertSee($this->ticket->title)
             ->assertSee($this->ticket->content)
             ->assertOk();
+    }
+
+    /** @test */
+    public function a_guest_cannot_get_single_ticket()
+    {
+        $this->json('GET', '/api' . $this->ticket->path(), [], $this->headers)
+            ->assertUnauthorized();
     }
 }
