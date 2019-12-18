@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Note;
+use App\User;
 use App\Ticket;
 use Tests\TestCase;
 use Illuminate\Database\Eloquent\Collection;
@@ -54,5 +55,11 @@ class TicketTest extends TestCase
         $this->ticket->delete();
 
         $this->assertEquals(0, Note::count());
+    }
+
+    /** @test */
+    public function a_ticket_has_an_author()
+    {
+        $this->assertInstanceOf(User::class, $this->ticket->author);
     }
 }

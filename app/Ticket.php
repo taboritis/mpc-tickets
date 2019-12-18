@@ -41,4 +41,9 @@ class Ticket extends Model
             ->where('closed_at', '<', now()->subDays($days))
             ->where('closed_at', '!=', null);
     }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'requested_by');
+    }
 }
