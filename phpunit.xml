@@ -20,8 +20,8 @@
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
 
-        <testsuite name="App">
-            <directory suffix="Test.php">./app</directory>
+        <testsuite name="Jobs">
+            <directory suffix="Test.php">./tests/Jobs</directory>
         </testsuite>
     </testsuites>
     <filter>
