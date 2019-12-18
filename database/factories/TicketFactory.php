@@ -4,6 +4,7 @@
 
 use App\User;
 use App\Ticket;
+use App\SupportMember;
 use Faker\Generator as Faker;
 
 $factory->define(Ticket::class, function (Faker $faker) {
@@ -11,5 +12,6 @@ $factory->define(Ticket::class, function (Faker $faker) {
         'title' => $faker->word(),
         'content' => $faker->sentence,
         'requested_by' => create(User::class)->id,
+        'assigned_to' => create(SupportMember::class)->id,
     ];
 });

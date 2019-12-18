@@ -29,6 +29,7 @@ class UserTest extends TestCase
         $this->assertInstanceOf(User::class, $this->user);
         $this->assertNotNull($this->user->name);
         $this->assertNotNull($this->user->surname);
+        $this->assertNotNull($this->user->type);
         $this->assertNotFalse(filter_var($this->user->email, FILTER_VALIDATE_EMAIL));
     }
 
