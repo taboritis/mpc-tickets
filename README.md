@@ -59,6 +59,8 @@ Like in Laravel [documentation](https://laravel.com/docs/master/scheduling).
 * POST: Each user can STORE ticket (SupportMember extends User)
 * PUT: SupportMember and Ticker author can update Ticket
 * DELETE: Only admin can delete Ticket
+* POST: Each user can add note to ticket
+* POST: SupportMember only can add note to user
 
 ### Assumptions
 * Old tasks are defined as task where closet_at date is lesser than 30 days ago (number of days is defined in ``config/tickets.php``),
