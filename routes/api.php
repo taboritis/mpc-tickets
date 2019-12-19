@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('auth:api')->group(function () {
+    Route::get('/users', 'api\UsersApiController@index');
+    Route::apiResource('/tickets', 'api\TicketsApiController');
+    Route::post('/users/{user}/notes', 'api\CreateNotesApiController@user');
+    Route::post('/tickets/{ticket}/notes', 'api\CreateNotesApiController@ticket');
+});
