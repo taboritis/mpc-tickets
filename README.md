@@ -30,11 +30,11 @@ Like in Laravel [documentation](https://laravel.com/docs/master/scheduling).
 
 6. Login data
 
-* typical user account
-    * login: typical.user@example.com
-    * password: password
 * support member account
     * login: support.member@example.com
+    * password: password
+* typical user account
+    * login: typical.user@example.com
     * password: password
     
 ## Solutions and assumptions
