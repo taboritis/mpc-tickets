@@ -28,7 +28,12 @@ php artisan migrate:fresh --seed
 
 Like in Laravel [documentation](https://laravel.com/docs/master/scheduling).
 
-6. Login data
+6. Run tests
+```shell script
+./vendor/bin/phpunit
+```
+
+7. Login data
 
 * support member account
     * login: support.member@example.com
