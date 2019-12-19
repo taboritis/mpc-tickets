@@ -38,11 +38,31 @@ class TicketsApiController extends BaseApiController
         return new TicketResource($ticket);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(Request $request)
     {
         $inputs = $request->all();
-        Ticket::create($inputs);
+        $ticket = Ticket::create($inputs);
 
-        return response('Ticket created', 201);
+        return (new TicketResource($ticket))->response();
+    }
+
+    /**
+     * @param Ticket $ticket
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Ticket $ticket, Request $request)
+    {
+        $inputs = $request->all();
+
+        $ticket->update($inputs);
+
+        return (new TicketResource($ticket))->response();
     }
 }

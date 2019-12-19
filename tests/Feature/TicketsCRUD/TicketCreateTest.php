@@ -26,7 +26,7 @@ class TicketCreateTest extends TestCase
 
         $ticket = make(Ticket::class);
 
-        $response = $this->json('POST', '/api/tickets', $ticket->toArray(), $this->headers)
+        $this->json('POST', '/api/tickets', $ticket->toArray(), $this->headers)
             ->assertStatus(201);
 
         $this->assertDatabaseHas('tickets', [
