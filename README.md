@@ -26,8 +26,7 @@ php artisan migrate:fresh --seed
 ```
 5. Setup cron
 
-Zgodnie z dokumentacją Laravela:
-https://laravel.com/docs/master/scheduling
+Like in Laravel [documentation](https://laravel.com/docs/master/scheduling).
 
 6. Login data
 
