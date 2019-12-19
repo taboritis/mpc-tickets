@@ -65,4 +65,17 @@ class TicketsApiController extends BaseApiController
 
         return (new TicketResource($ticket))->response();
     }
+
+    /**
+     * @param Ticket $ticket
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function destroy(Ticket $ticket)
+    {
+        $ticket->delete();
+
+        return response('Ticket deleted', 204);
+    }
 }
