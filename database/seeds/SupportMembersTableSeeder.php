@@ -11,6 +11,12 @@ class SupportMembersTableSeeder extends Seeder
      */
     public function run()
     {
+        create(SupportMember::class, [
+            'name' => 'Support',
+            'surname' => 'Member',
+            'email' => 'support.member@example.com',
+        ]);
+
         create(SupportMember::class, [], 5);
     }
 }

@@ -70,7 +70,7 @@ class TicketReadTest extends TestCase
     }
 
     /** @test */
-    public function owner_can_see_ticket()
+    public function author_can_see_ticket()
     {
         $this->signIn($this->ticket->author);
 
@@ -81,6 +81,22 @@ class TicketReadTest extends TestCase
             ->assertSee($this->ticket->title)
             ->assertSee($this->ticket->content)
             ->assertOk();
+    }
+
+    /** @test */
+    public function non_author_cannot_see_ticket_details()
+    {
+        $this->signIn();
+
+        $this->get($this->ticket->path())->assertStatus(403);
+    }
+
+    /** @test */
+    public function a_support_member_can_see_ticket_details()
+    {
+        $this->signInAsSupportMember();
+
+        $this->get($this->ticket->path())->assertStatus(200);
     }
 
     /** @test */
