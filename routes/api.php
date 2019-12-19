@@ -20,4 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->group(function () {
     Route::get('/users', 'api\UsersApiController@index');
     Route::apiResource('/tickets', 'api\TicketsApiController');
+    Route::post('/users/{user}/notes', 'api\CreateNotesApiController@user');
+    Route::post('/tickets/{ticket}/notes', 'api\CreateNotesApiController@ticket');
 });

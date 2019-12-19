@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Note extends Model
 {
+    protected $guarded = [];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -26,6 +28,4 @@ class Note extends Model
     {
         return $this->morphTo();
     }
-
-
 }
