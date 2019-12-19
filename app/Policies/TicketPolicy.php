@@ -32,7 +32,7 @@ class TicketPolicy
      */
     public function view(User $user, Ticket $ticket)
     {
-        //
+        return $user->isAuthor($ticket) || $user->isSupportMember();
     }
 
     /**

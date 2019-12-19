@@ -46,16 +46,17 @@ Like in Laravel [documentation](https://laravel.com/docs/master/scheduling).
 ### Permissions
 
 * Guests (unauthenticated) users can see login and register pages only,
-* each or users can see list of Tickets,
-* Ticket author and SupportMember can see Ticket details, 
+* Each user can see list of Tickets,
+* Only SupportMember can see list of Notes
+* Ticket Author and SupportMember can see Ticket details, 
 * SupportMember can see list of Users
 * SupportMember can see notes related to Users
 * Support Member and Ticket author can see notes related to Ticket
 
-#### By API endopoints
-* GET: Each of users can get list of tickets
+#### With API endopoints
+* GET: Each user can get list of tickets
 * GET: Ticket author and SupportMember can get ticket with details
-* POST: Each of users can STORE ticket (SupportMember extends User)
+* POST: Each user can STORE ticket (SupportMember extends User)
 * PUT: SupportMember and Ticker author can update Ticket
 * DELETE: Only admin can delete Ticket
 
