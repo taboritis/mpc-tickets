@@ -16,7 +16,8 @@
         <tr data-toggle="collapse" data-target="#collapsedNotes{{ $user->id  }}">
           <td>{{ $user->name }}</td>
           <td>{{ $user->surname }}</td>
-          <td>{{ $user->email }}</td>
+          <td>{{ $user->email }} <span class="small text-danger">click me</span>
+          </td>
           <td class="text-right">
             <div class="d-flex">
               <div class="text-center mr-auto">
