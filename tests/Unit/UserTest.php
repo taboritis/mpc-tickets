@@ -64,4 +64,11 @@ class UserTest extends TestCase
         $fullname = $this->user->name . ' ' . $this->user->surname;
         $this->assertEquals($fullname, $this->user->fullname());
     }
+
+    /** @test */
+    public function an_user_has_a_path()
+    {
+        $path = '/users/' . $this->user->id;
+        $this->assertEquals($path, $this->user->path());
+    }
 }

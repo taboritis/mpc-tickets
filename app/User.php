@@ -89,4 +89,12 @@ class User extends Authenticatable
     {
         return ($this->id == $ticket->requested_by);
     }
+
+    /**
+     * @return string
+     */
+    public function path()
+    {
+        return "/users/{$this->id}";
+    }
 }
