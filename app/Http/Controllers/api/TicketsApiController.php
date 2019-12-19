@@ -56,9 +56,12 @@ class TicketsApiController extends BaseApiController
      * @param Request $request
      *
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Ticket $ticket, Request $request)
     {
+        $this->authorize('update', $ticket);
+
         $inputs = $request->all();
 
         $ticket->update($inputs);
@@ -74,6 +77,8 @@ class TicketsApiController extends BaseApiController
      */
     public function destroy(Ticket $ticket)
     {
+        $this->authorize('delete', $ticket);
+
         $ticket->delete();
 
         return response('Ticket deleted', 204);

@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\User;
+use App\SupportMember;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 /**
@@ -33,5 +34,14 @@ abstract class TestCase extends BaseTestCase
     protected function setHeaders(User $user): void
     {
         $this->headers = [ 'Authorization' => 'Bearer ' . $user->api_token ];
+    }
+
+    /**
+     * @return User|mixed
+     */
+    protected function signInAsSupportMember()
+    {
+        $supportMember = create(SupportMember::class);
+        return $this->signIn($supportMember);
     }
 }

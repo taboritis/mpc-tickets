@@ -71,4 +71,22 @@ class User extends Authenticatable
     {
         return "{$this->name} {$this->surname}";
     }
+
+    /**
+     * @return bool
+     */
+    public function isSupportMember(): bool
+    {
+        return $this->type === 'support_member';
+    }
+
+    /**
+     * @param Ticket $ticket
+     *
+     * @return bool
+     */
+    public function isAuthor(Ticket $ticket): bool
+    {
+        return ($this->id == $ticket->requested_by);
+    }
 }

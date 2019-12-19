@@ -38,9 +38,39 @@ class TicketUpdateTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticated_user_can_update_ticket()
+    public function author_can_update_ticket()
+    {
+        $this->signIn($this->ticket->author);
+
+        $this->assertAuthenticatedAs($this->ticket->author);
+
+        $inputs = [
+            'content' => $this->faker->paragraph,
+        ];
+
+        $res = $this->json('PUT', '/api' . $this->ticket->path(), $inputs, $this->headers)
+            ->assertStatus(200);
+
+        $this->assertEquals($inputs['content'], $this->ticket->fresh()->content);
+    }
+
+    /** @test */
+    public function non_author_cannot_update_ticket()
     {
         $this->signIn();
+
+        $inputs = [ 'content' => $this->faker->paragraph ];
+
+        $res = $this->json('PUT', '/api' . $this->ticket->path(), $inputs, $this->headers)
+            ->assertStatus(403);
+
+        $this->assertNotEquals($inputs['content'], $this->ticket->fresh()->content);
+    }
+
+    /** @test */
+    public function support_member_can_update_ticket()
+    {
+        $this->signInAsSupportMember();
         $inputs = [
             'content' => $this->faker->paragraph,
         ];
