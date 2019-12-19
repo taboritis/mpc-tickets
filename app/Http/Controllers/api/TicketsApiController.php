@@ -77,6 +77,8 @@ class TicketsApiController extends BaseApiController
      */
     public function destroy(Ticket $ticket)
     {
+        $this->authorize('delete', $ticket);
+
         $ticket->delete();
 
         return response('Ticket deleted', 204);

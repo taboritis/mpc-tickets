@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\TicketsCRUD;
 
+use App\User;
 use App\Ticket;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -25,9 +26,21 @@ class TicketDeleteTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticated_user_can_delete_ticket()
+    public function random_user_cant_delete_ticket()
     {
         $this->signIn();
+        $this->json('DELETE', '/api' . $this->ticket->path(), [], $this->headers)
+            ->assertStatus(403);
+
+        $this->assertDatabaseHas('tickets', [ 'id' => $this->ticket->id ]);
+    }
+
+    /** @test */
+    public function only_admin_can_delete_tickets()
+    {
+        $user = create(User::class, [ 'email' => 'admin@admin.com' ]);
+        $this->signIn($user);
+
         $this->json('DELETE', '/api' . $this->ticket->path(), [], $this->headers)
             ->assertStatus(204);
 

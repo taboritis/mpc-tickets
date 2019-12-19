@@ -70,7 +70,7 @@ class TicketPolicy
      */
     public function delete(User $user, Ticket $ticket)
     {
-        //
+        return $user->email === 'admin@admin.com';
     }
 
     /**
