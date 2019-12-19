@@ -65,3 +65,13 @@ https://laravel.com/docs/master/scheduling
 * *SupportMember* Model extends *User*,
 * User has notes visible *only to SupportMember* (in task requirements was *"User has list of Notes that are not visible to Support Member only"*)
 
+### API Endpoints
+| Method    | Endopoint                     | Controller Action                                         |
+|-----------|-------------------------------|-----------------------------------------------------------|
+| GET       | api/tickets                   | App\Http\Controllers\api\TicketsApiController@index       |
+| POST      | api/tickets                   | App\Http\Controllers\api\TicketsApiController@store       |
+| GET|HEAD  | api/tickets/{ticket}          | App\Http\Controllers\api\TicketsApiController@show        |
+| PUT|PATCH | api/tickets/{ticket}          | App\Http\Controllers\api\TicketsApiController@update      |
+| DELETE    | api/tickets/{ticket}          | App\Http\Controllers\api\TicketsApiController@destroy     |
+| POST      | api/tickets/{ticket}/notes    | App\Http\Controllers\api\CreateNotesApiController@ticket  |
+| POST      | api/users/{user}/notes        | App\Http\Controllers\api\CreateNotesApiController@user    |
