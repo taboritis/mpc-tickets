@@ -49,7 +49,7 @@ Like in Laravel [documentation](https://laravel.com/docs/master/scheduling).
 * Each user can see list of Tickets,
 * Only SupportMember can see list of Notes
 * Ticket Author and SupportMember can see Ticket details, 
-* SupportMember can see list of Users
+* Each User can see list of Users,
 * SupportMember can see notes related to Users
 * Support Member and Ticket author can see notes related to Ticket
 
