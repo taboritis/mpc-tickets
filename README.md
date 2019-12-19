@@ -68,7 +68,7 @@ Like in Laravel [documentation](https://laravel.com/docs/master/scheduling).
 * User has notes visible *only to SupportMember* (in task requirements was *"User has list of Notes that are not visible to Support Member only"*)
 
 ### API Endpoints
-| Method    | Endopoint                     | Controller Action                                         |
+| Method    | Endpoint                     | Controller Action                                         |
 |-----------|-------------------------------|-----------------------------------------------------------|
 | GET       | api/tickets                   | App\Http\Controllers\api\TicketsApiController@index       |
 | POST      | api/tickets                   | App\Http\Controllers\api\TicketsApiController@store       |
