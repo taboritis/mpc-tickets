@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt(env('ADMIN_PASSWORD', 'password')),
         ]);
 
-        $users = create(User::class, [], 20);
+        $users = create(User::class, [], 10);
 
         foreach ($users as $user) {
             create(Note::class, [

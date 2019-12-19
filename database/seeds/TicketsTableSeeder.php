@@ -9,7 +9,7 @@ class TicketsTableSeeder extends Seeder
 {
     public function run(Faker $faker)
     {
-        create(Ticket::class, [], 100);
+        create(Ticket::class, [], 30);
 
         foreach (Ticket::all() as $ticket) {
             create(Note::class, [
